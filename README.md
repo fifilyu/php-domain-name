@@ -19,7 +19,7 @@
     * foobar-.com
     * foobar%.com
     * foobar.baz
-* 支持获取域名字段信息。比如，可以从`www.foobar.com.cn`中，分别得到`www`、foobar`、`com`、`cn`
+* 支持获取域名字段信息。比如，可以从`www.foobar.com.cn`中，分别得到`www`、`foobar`、`com`、`cn`
 * 支持英文域名、中文域名、中文域名转码等等。比如：
     * foobar.com
     * 时尚.中国
