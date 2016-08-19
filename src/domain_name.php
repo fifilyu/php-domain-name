@@ -24,6 +24,16 @@
 
 namespace DomainName;
 
+// 2.3.4. Size limits https://tools.ietf.org/html/rfc1035
+/** @var integer 域名最大长度 */
+define("kDomainNameMaxSize", 253);
+
+/** @var integer 字段最大长度 */
+define("kFeildMaxSize", 63);
+
+/** @var integer 顶级域最小长度(点+两个字母) */
+define("kTLDMinSize", 3);
+
 /**
  * 无效域名异常类
  */
@@ -172,7 +182,7 @@ function _validate_host($feild)
 {
     $len = strlen($feild);
 
-    if ($len == 0)
+    if ($len == 0 || $len > kFeildMaxSize)
         return false;
 
     if ($feild == '-')
@@ -202,7 +212,7 @@ function _validate_dn($feild)
 {
     $len = strlen($feild);
 
-    if ($len <= 1)
+    if ($len <= 1 || $len > kFeildMaxSize)
         return false;
 
     if ($feild[0] == '-' || $feild[$len - 1] == '-')
@@ -232,6 +242,10 @@ function _validate_tld($feild)
 {
     global $tlds;
     $key = '.' . $feild;
+    $len = strlen($key);
+
+    if ($len < kTLDMinSize || $len > kFeildMaxSize)
+        return false;
 
     // 效率无限接近 O(1)
     return isset($tlds[$key]) || array_key_exists($key, $tlds);
@@ -250,6 +264,9 @@ function _validate_tld($feild)
  */
 function detect($domain_name)
 {
+    if (!$domain_name || strlen($domain_name) > kDomainNameMaxSize || $domain_name[0] == '.')
+        throw new DomainNameException('Invalid domain name.');
+
     $dn_obj = new DomainName($domain_name);
 
     $feilds = explode('.', $domain_name);

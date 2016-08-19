@@ -68,13 +68,35 @@ class TestCase extends PHPUnit_Framework_TestCase
      */
     public function testDetectCase1()
     {
+        DomainName\detect('.foobar.com');
+    }
+
+
+    /**
+     * @expectedException DomainName\DomainNameException
+     */
+    public function testDetectCase2()
+    {
+        $dn = 'aekui5phea2Eeyeelaijiex5ahniefaitied5Cohpei1Yoh6chaingohwie9pao';
+        $dn .= '.aekui5phea2Eeyeelaijiex5ahniefaitied5Cohpei1Yoh6chaingohwie9pao';
+        $dn .= '.aekui5phea2Eeyeelaijiex5ahniefaitied5Cohpei1Yoh6chaingohwie9pao';
+        $dn .= '.aekui5phea2Eeyeelaijiex5ahniefaitied5Cohpei1Yoh6chaingohwie9pao';
+        $dn .= '.com';
+        DomainName\detect($dn);
+    }
+
+    /**
+     * @expectedException DomainName\DomainNameException
+     */
+    public function testDetectCase3()
+    {
         DomainName\detect('com');
     }
 
     /**
      * @expectedException DomainName\DomainNameException
      */
-    public function testDetectCase2()
+    public function testDetectCase4()
     {
         DomainName\detect('foobar.foobar');
     }
@@ -84,7 +106,7 @@ class TestCase extends PHPUnit_Framework_TestCase
      */
     public function testDetectHostCase1()
     {
-        DomainName\detect('.foobar.com');
+        DomainName\detect('aekui5phea2Eeyeelaijiex5ahniefaitied5Cohpei1Yoh6chaingohwie9paoa.foobarcom');
     }
 
     /**
@@ -92,7 +114,7 @@ class TestCase extends PHPUnit_Framework_TestCase
      */
     public function testDetectHostCase2()
     {
-        DomainName\detect('-.foobar.com');
+        DomainName\detect('.foobar.com');
     }
 
     /**
@@ -100,7 +122,7 @@ class TestCase extends PHPUnit_Framework_TestCase
      */
     public function testDetectHostCase3()
     {
-        DomainName\detect('baz-.foobar.com');
+        DomainName\detect('-.foobar.com');
     }
 
     /**
@@ -108,13 +130,21 @@ class TestCase extends PHPUnit_Framework_TestCase
      */
     public function testDetectHostCase4()
     {
-        DomainName\detect('-baz.foobar.com');
+        DomainName\detect('baz-.foobar.com');
     }
 
     /**
      * @expectedException DomainName\DomainNameException
      */
     public function testDetectHostCase5()
+    {
+        DomainName\detect('-baz.foobar.com');
+    }
+
+    /**
+     * @expectedException DomainName\DomainNameException
+     */
+    public function testDetectHostCase6()
     {
         DomainName\detect('%.foobar.com');
     }
