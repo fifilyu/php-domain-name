@@ -100,7 +100,7 @@ class TestCase extends PHPUnit_Framework_TestCase
      */
     public function testDetectHostCase3()
     {
-        DomainName\detect('baz-.foobar.foobar');
+        DomainName\detect('baz-.foobar.com');
     }
 
     /**
@@ -108,7 +108,7 @@ class TestCase extends PHPUnit_Framework_TestCase
      */
     public function testDetectHostCase4()
     {
-        DomainName\detect('-baz.foobar.foobar');
+        DomainName\detect('-baz.foobar.com');
     }
 
     /**
@@ -116,7 +116,7 @@ class TestCase extends PHPUnit_Framework_TestCase
      */
     public function testDetectHostCase5()
     {
-        DomainName\detect('%.foobar.foobar');
+        DomainName\detect('%.foobar.com');
     }
 
     /**
