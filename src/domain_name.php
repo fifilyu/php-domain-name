@@ -240,6 +240,8 @@ $tlds = load_tlds_db();
  */
 function _validate_tld($feild)
 {
+    global $tlds;
+
     $key = '.' . $feild;
     $len = strlen($key);
 
