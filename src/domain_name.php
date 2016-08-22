@@ -61,7 +61,7 @@ class DomainName
     /**
      * DomainName构造函数
      *
-     * @param string 域名字符串
+     * @param string $domain_name 域名字符串
      */
     function __construct($domain_name)
     {
@@ -129,7 +129,7 @@ class DomainName
     /**
      * 增加顶级域字段值
      *
-     * @param string $value
+     * @param string
      */
     public function addFeildTopLevelDomain($value)
     {
@@ -240,7 +240,6 @@ $tlds = load_tlds_db();
  */
 function _validate_tld($feild)
 {
-    global $tlds;
     $key = '.' . $feild;
     $len = strlen($key);
 
@@ -256,7 +255,7 @@ function _validate_tld($feild)
  *
  * 验证域名字符串，通过验证后，将字段值保存到DomainName类对象
  *
- * @param string 域名字符串
+ * @param string $domain_name 域名字符串
  *
  * @return DomainName
  *
