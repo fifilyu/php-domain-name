@@ -226,7 +226,7 @@ function _validate_dn($feild)
 }
 
 /** 载入顶级域数据到数组中 */
-$tlds = load_tlds_db();
+define('kTLDs', load_tlds_db());
 
 /**
  * 验证顶级域字段
@@ -240,13 +240,13 @@ $tlds = load_tlds_db();
  */
 function _validate_tld($feild)
 {
-    global $tlds;
-
     $key = '.' . $feild;
     $len = strlen($key);
 
     if ($len < kTLDMinSize || $len > kFeildMaxSize)
         return false;
+
+    $tlds = kTLDs;
 
     // 效率无限接近 O(1)
     return isset($tlds[$key]) || array_key_exists($key, $tlds);
